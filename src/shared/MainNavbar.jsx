@@ -2,11 +2,22 @@ import React from 'react'
 
 import { Link, NavLink } from 'react-router-dom'
 
+import { useDispatch } from 'react-redux'
+
+
+import { useSelector } from 'react-redux';
+import { logOut, selectCurrentUser } from '../auth/authSlice';
+
+
 export const MainNavbar = () => {
-  // <nav>
-  //     <NavLink to='/' >Home</NavLink>
-  //     <NavLink to='/blogs' >Blogs</NavLink>
-  // </nav>
+  const auth = useSelector(selectCurrentUser)
+
+  const dispatch = useDispatch();
+
+  const handleDispatch = () => {
+    console.log('ander');
+    dispatch(logOut())
+  }
 
   return (
 
@@ -24,6 +35,20 @@ export const MainNavbar = () => {
                 <NavLink className="nav-link " to={'/blogs'} >Blogs</NavLink>
               </li>
             </ul>
+            <ul className="navbar-nav">
+              <li className="nav-item">
+                <NavLink className="nav-link " to={'/login'} >Login</NavLink>
+              </li>
+            </ul>
+            {
+              auth &&
+              <ul className="navbar-nav">
+                <li className="nav-item">
+                  <button onClick={handleDispatch}> LogOut</button>
+                </li>
+              </ul>
+            }
+
           </div>
         </div>
       </nav>

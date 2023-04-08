@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-// import axios from 'axios';
+import { useSelector } from 'react-redux';
+import { selectCurrentUser } from '../../auth/authSlice';
 
-import BlogRepository from '../blog/ApiBlog';
+import BlogRepository from './ApiBlog';
 
 const blogRepo = new BlogRepository();
 
@@ -23,6 +24,10 @@ const Blogs = () => {
       });
   }, []);
 
+
+  const auth = useSelector(selectCurrentUser)
+
+  console.log(auth)
 
   return (
     <div>

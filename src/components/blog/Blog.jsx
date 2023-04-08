@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
 
 
-import BlogRepository from '../blog/ApiBlog';
+import BlogRepository from './ApiBlog';
 
 const blogRepo = new BlogRepository();
 
