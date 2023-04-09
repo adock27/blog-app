@@ -42,11 +42,21 @@ export const MainNavbar = () => {
             </ul>
             {
               auth &&
-              <ul className="navbar-nav">
-                <li className="nav-item">
-                  <button onClick={handleDispatch}> LogOut</button>
-                </li>
-              </ul>
+              (<>
+
+                <ul className="navbar-nav">
+                  <li className="nav-item">
+                    <NavLink className="nav-link " to={'/blogs/add'} >Add Blog</NavLink>
+                  </li>
+                </ul>
+
+                <ul className="navbar-nav">
+                  <li className="nav-item">
+                    <button onClick={handleDispatch}> LogOut</button>
+                  </li>
+                </ul>
+
+              </>)
             }
 
           </div>

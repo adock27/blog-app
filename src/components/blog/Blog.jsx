@@ -19,6 +19,7 @@ const Blog = () => {
     blogRepo.getBlogbyId(id)
       .then(data => {
         setBlogs(data.data.data);
+        console.log(data);
       })
       .catch(error => {
         console.error(error.message);
@@ -33,7 +34,7 @@ const Blog = () => {
         <div>cargando</div>
       ) : (
         <div>
-          <img className='w-100 rounded-4' src={blogs.image} height={250} alt="" />
+          <img className='img-fluid rounded-4 col-md-8 col-lg-6' src={blogs.cover} height={250} alt="" />
           <h6>{blogs.title}</h6>
           {blogs.body}
           <br />

@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './components/Home';
 import Blogs from './components/blog/Blogs'
 import Blog from './components/blog/Blog';
+import BlogForm from './components/blog/BlogForm';
 import MainNavbar from './shared/MainNavbar';
 import Login from './components/Login';
 
@@ -15,14 +16,18 @@ function App() {
   const auth = useSelector(selectCurrentUser)
   return (
     <BrowserRouter>
-      {auth ? 'User Logged' : 'Not a session active'} 
+      {auth ? 'User Logged' : 'Not a session active'}
       <MainNavbar />
       <Routes>
+        {auth && <>
+          <Route path="/blogs/add" element={<BlogForm />} />
+        </>}
         <Route path="/" element={<Home />} />
         <Route path="/blogs" element={<Blogs />} />
         <Route path="/blogs/:id" element={<Blog />} />
         <Route path="/login" element={<Login />} />
         <Route path="*" element={<Home />} />
+
       </Routes>
     </BrowserRouter>
   );

@@ -5,7 +5,13 @@ const baseUrl = 'http://localhost:3001';
 
 export default class ApiBlog {
 
-
+    async addBlog(blog) {
+        try {
+            return await axios.post(`${baseUrl}/api/blogs`, blog);
+        } catch (error) {
+            throw new Error(`Error fetching blogs from ${baseUrl}: ${error.message}`);
+        }
+    }
     async getBlogs() {
         try {
             return await axios.get(`${baseUrl}/api/blogs`);
@@ -46,6 +52,30 @@ export default class ApiBlog {
             return response.ok;
         } catch (error) {
             throw new Error(`Error deleting blog ${id} from ${baseUrl}: ${error.message}`);
+        }
+    }
+
+    async addCover(file) {
+        try {
+            const response = axios.post(`${baseUrl}/api/files`, file, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
+
+            return response;
+        } catch (error) {
+            throw new Error(`Error deleting blog ${file} from ${baseUrl}: ${error.message}`);
+        }
+    }
+    async removeCover(filepath) {
+        const path = { path: filepath }
+        try {
+            const response = axios.post(`${baseUrl}/api/files/remove`, path)
+
+            return response;
+        } catch (error) {
+            throw new Error(`Error deleting blog ${filepath} from ${baseUrl}: ${error.message}`);
         }
     }
 }
