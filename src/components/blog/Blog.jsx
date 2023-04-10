@@ -29,18 +29,20 @@ const Blog = () => {
 
   return (
     <div className='container'>
-
       {(blogs.loading) ? (
         <div>cargando</div>
       ) : (
         <div>
-          <img className='img-fluid rounded-4 col-md-8 col-lg-6' src={blogs.cover} height={250} alt="" />
-          <h6>{blogs.title}</h6>
+          <h1 className='mb-3'>{blogs.title}</h1>
+          <div className='text-secondary'>Published by :
+            {blogs.createdAt}
+          </div>
+          <img className='img-fluid rounded-4 col-md-8 col-lg-6 mb-3' src={blogs.cover} height={250} alt="" />
+          <br />
           {blogs.body}
           <br />
-          {blogs.createdAt}
           <br />
-          
+
           <h6>Comentarios</h6>
           {blogs.tags.map((tag, i) => <div key={i}>{tag}</div>)}
         </div>

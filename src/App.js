@@ -11,21 +11,38 @@ import Login from './components/Login';
 
 import { useSelector } from 'react-redux';
 import { selectCurrentUser } from './auth/authSlice';
+import ProtectedRoute from './components/ProtectedRoute';
+import Dashboard from './components/Dashboard';
+import { Link } from 'react-router-dom';
+import BlogListAdmin from './components/dashboard/BlogListAdmin';
 
 function App() {
-  const auth = useSelector(selectCurrentUser)
+  const user = useSelector(selectCurrentUser)
   return (
     <BrowserRouter>
-      {auth ? 'User Logged' : 'Not a session active'}
+      {user ? 'User Logged' : 'Not a session active'}
       <MainNavbar />
       <Routes>
-        {auth && <>
+        {/* {user && <>
           <Route path="/blogs/add" element={<BlogForm />} />
-        </>}
+        </>} */}
         <Route path="/" element={<Home />} />
         <Route path="/blogs" element={<Blogs />} />
         <Route path="/blogs/:id" element={<Blog />} />
         <Route path="/login" element={<Login />} />
+
+        <Route element={<ProtectedRoute user={user} />}>
+          <Route path="/dashboard/*" element={<Dashboard />}>
+            <Route path="" element={<p>Contenidos</p>} />
+            <Route path="blogs" element={<BlogListAdmin/>} />
+            <Route path="blogs/add" element={<BlogForm />} />
+          </Route>
+        </Route>
+
+
+
+
+
         <Route path="*" element={<Home />} />
 
       </Routes>

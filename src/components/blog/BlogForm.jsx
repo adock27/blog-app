@@ -1,20 +1,23 @@
 import React, { useState } from 'react'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-
+import { Link } from 'react-router-dom';
 
 //alert
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 
 import BlogRepository from './ApiBlog';
-
+import { useNavigate } from "react-router-dom";
 
 const blogRepo = new BlogRepository();
 
 const MySwal = withReactContent(Swal)
 
 const BlogForm = () => {
+
+  const navigate = useNavigate();
+
 
   const [blog, setBlog] = useState({
     title: '',
@@ -82,25 +85,32 @@ const BlogForm = () => {
   const onSubmitForm = (e) => {
     e.preventDefault();
 
-    console.log(blog);
+    // console.log(blog);
 
     blogRepo.addBlog(blog).then(response => {
-      console.log(response)
+
+      MySwal.fire({
+        title: 'Success!',
+        text: 'New blog saved!',
+        icon: 'success',
+        confirmButtonText: 'Cool'
+      })
+
+      navigate(`/blogs/${response.data.data._id}`);
+
     }).catch(error => {
       console.error(error.message);
     });
-    
-    MySwal.fire({
-      title: <p>Hello World</p>,
-    })
+
 
   }
 
 
 
   return (
-    <div className='container' onSubmit={onSubmitForm}>
-      <Form className='p-3'>
+    <div className='container' >
+      <h5 className='mb-3'>Create a new blog</h5>
+      <Form className='p-3' onSubmit={onSubmitForm}>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Title</Form.Label>
           <Form.Control name='title' type="text" placeholder="Enter title" onChange={handleInputChange} required />
@@ -125,6 +135,9 @@ const BlogForm = () => {
           <Form.Label>Body</Form.Label>
           <Form.Control name='body' as="textarea" rows={3} onChange={handleInputChange} required />
         </Form.Group>
+
+        <Link className="btn btn-secondary me-3" to="/dashboard/blogs">Cancel</Link>
+
 
         <Button variant="primary" type="submit">
           Share post

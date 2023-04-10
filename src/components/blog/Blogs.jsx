@@ -30,9 +30,9 @@ const Blogs = () => {
   console.log(auth)
 
   return (
-    <div>
-      <h3>List of Blogs</h3>
-      <table>
+    <div className='container'>
+      <h3 className='h6'>List of Blogs</h3>
+      <table className='table'>
         <tbody>
           {(blogs.loading) ? (
             <tr><td>cargando...</td></tr>
