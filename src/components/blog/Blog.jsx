@@ -7,8 +7,8 @@ import BlogRepository from './ApiBlog';
 const blogRepo = new BlogRepository();
 
 const Blog = () => {
-  const { id } = useParams();
 
+  const { id } = useParams();
 
   const [blogs, setBlogs] = useState({
     data: [],
@@ -17,9 +17,8 @@ const Blog = () => {
 
   useEffect(() => {
     blogRepo.getBlogbyId(id)
-      .then(data => {
-        setBlogs(data.data.data);
-        console.log(data);
+      .then( ({data}) => {
+        setBlogs(data);
       })
       .catch(error => {
         console.error(error.message);

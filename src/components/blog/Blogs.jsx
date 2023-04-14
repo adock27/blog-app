@@ -18,7 +18,6 @@ const Blogs = () => {
     blogRepo.getBlogs()
       .then(data => {
         setBlogs(data);
-        console.log(data);
       })
       .catch(error => {
         console.error(error.message);
@@ -28,14 +27,14 @@ const Blogs = () => {
 
   const auth = useSelector(selectCurrentUser)
 
-  // console.log(auth)
 
   return (
     <div className='container'>
+      
       <h3 className='h6'>List of Blogs</h3>
       <table className='table'>
         <tbody>
-          {/* {(blogs.name) ? (
+          {(blogs.loading) ? (
             <tr><td>cargando...</td></tr>
           ) : (blogs.map((blog, key) => (
             <tr key={key}>
@@ -44,7 +43,7 @@ const Blogs = () => {
                 <Link to={`${blog._id}`}>ver</Link>
               </td>
             </tr>
-          )))} */}
+          )))}
 
         </tbody>
       </table>
