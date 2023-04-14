@@ -7,14 +7,17 @@ export default class ApiBlog {
 
     async addBlog(blog) {
         try {
-            return await axios.post(`${baseUrl}/api/blogs`, blog);
+            const {data} = await axios.post(`${baseUrl}/api/blogs`, blog);
+            return data;
         } catch (error) {
             throw new Error(`Error fetching blogs from ${baseUrl}: ${error.message}`);
         }
     }
     async getBlogs() {
         try {
-            return await axios.get(`${baseUrl}/api/blogs`);
+            const {data} = await axios.get(`${baseUrl}/api/blogs`);
+
+            return data;
         } catch (error) {
             throw new Error(`Error fetching blogs from ${baseUrl}: ${error.message}`);
         }

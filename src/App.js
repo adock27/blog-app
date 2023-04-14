@@ -18,6 +18,8 @@ import BlogListAdmin from './components/dashboard/BlogListAdmin';
 
 function App() {
   const user = useSelector(selectCurrentUser)
+// console.log(user);
+
   return (
     <BrowserRouter>
       {user ? 'User Logged' : 'Not a session active'}
